@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DevOps Project</title>
+    <style>
+        body { font-family: Arial; max-width: 800px; margin: 50px auto; padding: 20px; }
+        h1 { color: #333; }
+        .user-card { border: 1px solid #ddd; padding: 15px; margin: 10px 0; border-radius: 8px; }
+        button { background: #0066cc; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>DevOps Microservices Project</h1>
+    <p>Backend Status: <span id="status">checking...</span></p>
+    <button onclick="loadUsers()">Load Users</button>
+    <div id="users"></div>
+
+    <script>
+        fetch("http://localhost:5000/health")
+            .then(r => r.json())
+            .then(d => document.getElementById("status").innerText = d.status)
+            .catch(() => document.getElementById("status").innerText = "unreachable");
+
+        function loadUsers() {
+            fetch("http://localhost:5000/api/users")
+                .then(r => r.json())
+                .then(d => {
+                    document.getElementById("users").innerHTML = d.users
+                        .map(u => `<div class="user-card"><b>${u.name}</b><p>${u.email}</p></div>`)
+                        .join("");
+                });
+        }
+    </script>
+</body>
+</html>
