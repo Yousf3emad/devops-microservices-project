@@ -17,13 +17,13 @@
     <div id="users"></div>
 
     <script>
-        fetch("http://localhost:5000/health")
+        fetch("/api/health")
             .then(r => r.json())
             .then(d => document.getElementById("status").innerText = d.status)
             .catch(() => document.getElementById("status").innerText = "unreachable");
 
         function loadUsers() {
-            fetch("http://localhost:5000/api/users")
+            fetch("/api/users")
                 .then(r => r.json())
                 .then(d => {
                     document.getElementById("users").innerHTML = d.users
