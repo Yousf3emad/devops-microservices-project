@@ -16,7 +16,7 @@ spec:
       containers:
       - name: backend
         image: ghcr.io/yousf3emad/devops-microservices-project/backend:82210154a0a7e0546656b212fdd11720f00e1392
-        imagePullPolicy: Never
+        imagePullPolicy: Always
         env:
         - name: DB_HOST
           value: "postgres"
