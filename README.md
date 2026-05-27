@@ -4,6 +4,7 @@ A production-ready microservices platform built to demonstrate real-world DevOps
 
 ---
 
+
 ## 🏗️ Architecture
 
 ![Architecture Diagram](docs/images/architecture.png)
