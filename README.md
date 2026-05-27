@@ -2,27 +2,6 @@
 
 A production-ready microservices platform built to demonstrate real-world DevOps practices including containerization, container orchestration, and automated CI/CD pipelines.
 
----
-
-## 🏗️ Architecture
-
-Developer pushes code
-↓
-GitHub Actions (CI/CD Pipeline)
-↓
-Build Docker Images → Push to GHCR
-↓
-Update K8s Manifests automatically
-↓
-┌─────────────────────────────────┐
-│         Kubernetes Cluster      │
-│                                 │
-│  Ingress Controller (Nginx)     │
-│    /        →  Frontend         │
-│    /api     →  Backend          │
-│                  ↓              │
-│            PostgreSQL DB        │
-└─────────────────────────────────┘
 
 ---
 
@@ -41,29 +20,6 @@ Update K8s Manifests automatically
 | OS | CentOS Stream 9 |
 | Version Control | Git & GitHub |
 
----
-
-## 📁 Project Structure
-
-devops-microservices-project/
-├── .github/
-│   └── workflows/
-│       └── ci-cd.yaml          # CI/CD Pipeline
-├── backend/
-│   ├── app.py                  # Flask REST API
-│   ├── requirements.txt        # Python dependencies
-│   └── Dockerfile              # Backend container
-├── frontend/
-│   ├── index.html              # Frontend app
-│   └── Dockerfile              # Frontend container
-├── k8s/
-│   ├── namespace.yaml          # Project namespace
-│   ├── postgres.yaml           # Database deployment & service
-│   ├── backend.yaml            # Backend deployment & service
-│   ├── frontend.yaml           # Frontend deployment & service
-│   └── ingress.yaml            # Nginx ingress rules
-├── kind-cluster.yaml           # Local K8s cluster config
-└── README.md
 
 ---
 
@@ -193,7 +149,6 @@ http://localhost        → Eid Greetings Platform (eid branch)
 **Youssef Emad**
 Junior DevOps Engineer
 
-[![GitHub](https://img.shields.io/badge/GitHub-Yousf3emad-black?logo=github)](https://github.com/Yousf3emad)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?logo=linkedin)](https://linkedin.com/in/youssef-emad-a16b18214/)
 
 ---
