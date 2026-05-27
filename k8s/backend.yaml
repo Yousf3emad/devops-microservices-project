@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: ghcr.io/yousf3emad/devops-microservices-project/backend:63aa38ae1585d1e9f9cc30acaa18fb6aa19560ba
+        image: ghcr.io/yousf3emad/devops-microservices-project/backend:51faefb8c5e7542b8c5940ddd68739bed53f3f93
         imagePullPolicy: Always
         env:
         - name: DB_HOST
