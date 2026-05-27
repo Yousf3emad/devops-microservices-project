@@ -9,12 +9,14 @@ A production-ready microservices platform built to demonstrate real-world DevOps
 
 ![Architecture Diagram](docs/images/architecture.png)
 
----
 
+---
 
 ## 📸 Screenshots
 
-![Users Platform](docs/images/users-platform.png)
+![Users Platform](docs/images/eid-greetings-platform.png)
+
+
 ---
 
 ## 🛠️ Tech Stack
