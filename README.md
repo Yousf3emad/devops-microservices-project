@@ -2,6 +2,13 @@
 
 A production-ready microservices platform built to demonstrate real-world DevOps practices including containerization, container orchestration, and automated CI/CD pipelines.
 
+---
+
+
+## 🏗️ Architecture
+
+![Architecture Diagram](docs/images/architecture.png)
+
 
 ---
 
