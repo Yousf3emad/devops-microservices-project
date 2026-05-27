@@ -1,36 +1,117 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>DevOps Project</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عيد أضحى مبارك</title>
     <style>
-        body { font-family: Arial; max-width: 800px; margin: 50px auto; padding: 20px; }
-        h1 { color: #333; }
-        .user-card { border: 1px solid #ddd; padding: 15px; margin: 10px 0; border-radius: 8px; }
-        button { background: #0066cc; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: linear-gradient(135deg, #1a4a1a 0%, #2d5a1b 50%, #1a3a0a 100%); min-height: 100vh; color: #fff; }
+        header { text-align: center; padding: 40px 20px 20px; background: rgba(0,0,0,0.3); }
+        header h1 { font-size: 2.5rem; color: #f0c040; text-shadow: 2px 2px 8px rgba(0,0,0,0.5); }
+        header p { color: #c8e6c9; margin-top: 8px; font-size: 1.1rem; }
+        .status { text-align: center; padding: 8px; font-size: 0.85rem; color: #a5d6a7; }
+        .greetings-container { max-width: 700px; margin: 30px auto; padding: 0 20px; }
+        .greetings-container h2 { color: #f0c040; margin-bottom: 16px; font-size: 1.3rem; }
+        .greeting-card { background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border: 1px solid rgba(240,192,64,0.3); border-radius: 16px; padding: 20px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: flex-start; transition: transform 0.2s; }
+        .greeting-card:hover { transform: translateY(-2px); }
+        .greeting-card .content { flex: 1; }
+        .greeting-card .name { font-weight: bold; color: #f0c040; font-size: 1.1rem; margin-bottom: 6px; }
+        .greeting-card .message { color: #e8f5e9; line-height: 1.5; }
+        .greeting-card .time { color: #81c784; font-size: 0.8rem; margin-top: 8px; }
+        .delete-btn { background: rgba(255,0,0,0.2); border: 1px solid rgba(255,0,0,0.4); color: #ff8a80; border-radius: 8px; padding: 6px 12px; cursor: pointer; font-size: 0.85rem; margin-right: 10px; transition: background 0.2s; }
+        .delete-btn:hover { background: rgba(255,0,0,0.4); }
+        .empty { text-align: center; color: #a5d6a7; padding: 40px; font-size: 1.1rem; }
+        .fab { position: fixed; bottom: 30px; left: 30px; width: 60px; height: 60px; background: #f0c040; color: #1a4a1a; border: none; border-radius: 50%; font-size: 2rem; cursor: pointer; box-shadow: 0 4px 20px rgba(240,192,64,0.5); transition: transform 0.2s, box-shadow 0.2s; z-index: 100; }
+        .fab:hover { transform: scale(1.1); box-shadow: 0 6px 25px rgba(240,192,64,0.7); }
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 200; justify-content: center; align-items: center; }
+        .modal-overlay.active { display: flex; }
+        .modal { background: linear-gradient(135deg, #1a4a1a, #2d5a1b); border: 2px solid #f0c040; border-radius: 20px; padding: 30px; width: 90%; max-width: 450px; }
+        .modal h2 { color: #f0c040; margin-bottom: 20px; text-align: center; font-size: 1.4rem; }
+        .modal input, .modal textarea { width: 100%; background: rgba(255,255,255,0.1); border: 1px solid rgba(240,192,64,0.4); border-radius: 10px; padding: 12px; color: #fff; font-size: 1rem; margin-bottom: 14px; font-family: inherit; }
+        .modal textarea { height: 100px; resize: none; }
+        .modal input::placeholder, .modal textarea::placeholder { color: #a5d6a7; }
+        .modal-buttons { display: flex; gap: 10px; justify-content: center; }
+        .btn-submit { background: #f0c040; color: #1a4a1a; border: none; border-radius: 10px; padding: 12px 24px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+        .btn-submit:hover { background: #ffd54f; }
+        .btn-cancel { background: transparent; color: #f0c040; border: 1px solid #f0c040; border-radius: 10px; padding: 12px 24px; font-size: 1rem; cursor: pointer; }
     </style>
 </head>
 <body>
-    <h1>DevOps Microservices Project</h1>
-    <p>Backend Status: <span id="status">checking...</span></p>
-    <button onclick="loadUsers()">Load Users</button>
-    <div id="users"></div>
-
+    <header>
+        <h1>🌙 عيد الأضحى مبارك 🌙</h1>
+        <p>🐑 تهانينا وأمنياتنا بعيد مبارك سعيد 🐑</p>
+    </header>
+    <div class="status">Backend: <span id="status">جاري التحقق...</span></div>
+    <div class="greetings-container">
+        <h2>🎉 تهاني الأعضاء</h2>
+        <div id="greetings-list"></div>
+    </div>
+    <button class="fab" onclick="openModal()" title="أضف تهنئتك">+</button>
+    <div class="modal-overlay" id="modal">
+        <div class="modal">
+            <h2>🐑 أضف تهنئتك</h2>
+            <input type="text" id="input-name" placeholder="اسمك" />
+            <textarea id="input-message" placeholder="اكتب تهنئتك هنا..."></textarea>
+            <div class="modal-buttons">
+                <button class="btn-submit" onclick="submitGreeting()">إرسال 🎉</button>
+                <button class="btn-cancel" onclick="closeModal()">إلغاء</button>
+            </div>
+        </div>
+    </div>
     <script>
         fetch("/api/health")
             .then(r => r.json())
-            .then(d => document.getElementById("status").innerText = d.status)
-            .catch(() => document.getElementById("status").innerText = "unreachable");
+            .then(d => document.getElementById("status").innerText = "✅ " + d.status)
+            .catch(() => document.getElementById("status").innerText = "❌ غير متاح");
 
-        function loadUsers() {
-            fetch("/api/users")
+        function loadGreetings() {
+            fetch("/api/greetings")
                 .then(r => r.json())
                 .then(d => {
-                    document.getElementById("users").innerHTML = d.users
-                        .map(u => `<div class="user-card"><b>${u.name}</b><p>${u.email}</p></div>`)
-                        .join("");
+                    const list = document.getElementById("greetings-list");
+                    if (!d.greetings || d.greetings.length === 0) {
+                        list.innerHTML = '<div class="empty">🌙 كن أول من يهنئ! اضغط + أسفل الشاشة</div>';
+                        return;
+                    }
+                    list.innerHTML = d.greetings.map(g => `
+                        <div class="greeting-card" id="card-${g.id}">
+                            <div class="content">
+                                <div class="name">🐑 ${g.name}</div>
+                                <div class="message">${g.message}</div>
+                                <div class="time">${new Date(g.created_at).toLocaleString('ar-EG')}</div>
+                            </div>
+                            <button class="delete-btn" onclick="deleteGreeting(${g.id})">🗑 حذف</button>
+                        </div>
+                    `).join("");
                 });
         }
+
+        function submitGreeting() {
+            const name = document.getElementById("input-name").value.trim();
+            const message = document.getElementById("input-message").value.trim();
+            if (!name || !message) { alert("من فضلك اكتب اسمك وتهنئتك!"); return; }
+            fetch("/api/greetings", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name, message })
+            }).then(() => { closeModal(); loadGreetings(); });
+        }
+
+        function deleteGreeting(id) {
+            if (!confirm("هل تريد حذف هذه التهنئة؟")) return;
+            fetch(`/api/greetings/${id}`, { method: "DELETE" }).then(() => loadGreetings());
+        }
+
+        function openModal() {
+            document.getElementById("modal").classList.add("active");
+            document.getElementById("input-name").value = "";
+            document.getElementById("input-message").value = "";
+        }
+
+        function closeModal() { document.getElementById("modal").classList.remove("active"); }
+
+        loadGreetings();
     </script>
 </body>
 </html>
