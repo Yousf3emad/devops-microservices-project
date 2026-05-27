@@ -16,7 +16,7 @@ def get_db():
 def health():
     return jsonify({"status": "healthy", "service": "backend"})
 
-@app.route("/api/users")
+@app.route("/users")
 def get_users():
     try:
         conn = get_db()
@@ -30,5 +30,3 @@ def get_users():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
-
-    
