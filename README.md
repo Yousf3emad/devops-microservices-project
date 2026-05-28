@@ -64,7 +64,6 @@ Each branch has its own CI/CD pipeline trigger and builds independent Docker ima
 | Endpoint | Method | Description |
 |----------|--------|-------------|
 | `/api/health` | GET | Backend health check |
-| `/api/users` | GET | Get all users |
 | `/api/greetings` | GET | Get all greetings |
 | `/api/greetings` | POST | Add new greeting |
 | `/api/greetings/:id` | DELETE | Delete greeting |
@@ -128,8 +127,7 @@ kubectl get all -n devops-microsservices-project
 
 ### 7. Access the Application
 
-http://localhost        → Users Platform (master branch)
-http://localhost        → Eid Greetings Platform (eid branch)
+http://localhost        → Eid Greetings Platform
 
 
 ---
